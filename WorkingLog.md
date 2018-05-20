@@ -30,22 +30,22 @@ Current attributes statistic as follow
 ![Attributes](/Attributes.jpg?raw=true "Attributes")
 
 From top to bottom:
-1. Id, Listing_url,Name, Summary, Picture_url: we don't need for processing.
+1. Id, Listing_url, Name, Summary, Picture_url: we don't need these for analysis, extract to different table
 2. host_response_time: categorical to numerical
 3. host_response_rate: transfer to numerical
-4. host_is_superhost, host_identity_verified: binary, transfer to 0 and 1
-5. neighbourhood_cleansed, zipcode: similar,  pick one
-6. state, city: other states? shall we delete those items?
-7. property_type,room_type: categorical to numerical
+4. host_is_superhost, host_identity_verified: binary, categorical to numerical 0 and 1?
+5. neighbourhood_cleansed, zipcode: similar, pick one?
+6. state, city: other states? shall we delete those houses?
+7. property_type, room_type: categorical to numerical
 8. accommodates, bathrooms, bedrooms, beds: numerical, for missing values shall we use 0?
-9. amenities: text tokenize to multiple attributes
+9. amenities: text tokenize to multiple attributes - TV,  wireless internet, air condition, heating, pets, washer, dryer
 10. price, security_deposit, cleaning_fee, extra_people: transfer to numerical
-11. minimum_nights, maximum_nights, number_of_reviews: just records in system, not important for predictation?
+11. minimum_nights, maximum_nights, number_of_reviews: just records in system, not important for prediction?
 12. review_scores_rating: 4469 out of 5207, we can set those with 0 review for prediction (without verification)
 13. review_scores_accuracy/_cleanliness/_checkin/_communication/_location/_value: should not be used for prediction?
 14. reviews_per_month: not important for predictation?
 
-Lots of preprocessing work to be done... manually.
+Looks like lots of preprocessing work to be done... manually.
 
 
 
