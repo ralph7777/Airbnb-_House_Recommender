@@ -1,19 +1,19 @@
 2018/5/20 Ralph
 
-# Design Features:
-## 1. Recommender:
-### Item-based recommender:
+## Design Features:
+### 1. Recommender:
+Item-based recommender:
 a) Do feature selection based on rating value, determine the relative important features for rating. 
 b) Compare the similaries among selected features of items in system, give the most similar item to the user choice as recommender.
 
-### User-based recommender:
+User-based recommender:
 a) Transfer user's text review to rating score based on key words.
 b) Look for users with similar ratings on same items, recommend item to current user based on other's choice.
 
-## 2. Review Text Mining (User interface App):
+### 2. Review Text Mining (Interface feature):
 Make a prediction of item score based on content of text review.
 
-## 3. Rent Price Advicing:
+### 3. Rent Price Advicing (Interface feature):
 Based on prices of similar item (determined by selected features similarity), give reasonable price for a new item.
 Here we may need to switch target attribute to Price.
 
@@ -23,7 +23,8 @@ Here we may need to switch target attribute to Price.
 Data Preprocessing:
 
 Current attributes statistic as follow
-![Attributes](/Attributes.png?raw=true "Attributes")
+
+![Attributes](/Attributes.jpg?raw=true "Attributes")
 
 From top to bottom:
 1. Id, Listing_url,Name, Summary, Picture_url: we don't need for processing.
