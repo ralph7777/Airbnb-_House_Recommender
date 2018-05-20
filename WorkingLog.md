@@ -1,14 +1,17 @@
+Feel free to add any ideas or works you have done along with name and date.
+
+-------
 2018/5/20 Ralph
 
 ## Design Features:
 ### 1. Recommender:
-Item-based recommender:
-a) Do feature selection based on rating value, determine the relative important features for rating. 
-b) Compare the similaries among selected features of items in system, give the most similar item to the user choice as recommender.
+Item-based recommender:<br />
+a) Do feature selection based on rating value, determine the relative important features for rating. <br />
+b) Compare the similaries among selected features of items in system, give the most similar item to the user choice as recommender.<br />
 
-User-based recommender:
-a) Transfer user's text review to rating score based on key words.
-b) Look for users with similar ratings on same items, recommend item to current user based on other's choice.
+User-based recommender:<br />
+a) Transfer user's text review to rating score based on key words.<br />
+b) Look for users with similar ratings on same items, recommend item to current user based on other's choice.<br />
 
 ### 2. Review Text Mining (Interface feature):
 Make a prediction of item score based on content of text review.
@@ -43,5 +46,6 @@ From top to bottom:
 14. reviews_per_month: not important for predictation?
 
 Lots of preprocessing work to be done... manually.
+
 
 
