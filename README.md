@@ -5,23 +5,22 @@ Feel free to add any ideas or works you have done along with name and date.
 
 Attributes preprocessing:
 
-id - 1
-Listing_url, Name, Summary, Picture_url - 5
-host_response_time - 2
-host_response_rate - 3
-host_is_superhost, host_identity_verified - 2
-neighbourhood_cleansed, state, city, zipcode - 6, 7
-property_type, room_type - 2
-accommodates, bathrooms, bedrooms, beds - 1, 7
-amenities (TV,  wireless internet, air condition, heating, pets, washer, dryer) - 4
-price, security_deposit, cleaning_fee, extra_people - 3
-minimum_nights, maximum_nights, number_of_reviews - 1
-review_scores_rating - 7
-review_scores_accuracy/_cleanliness/_checkin/_communication/_location/_value - 6
-instant_bookable - 2
-cancellation_policy - 2
-reviews_per_month - 6
-
+id - 1<br />
+Listing_url, Name, Summary, Picture_url - 5<br />
+host_response_time - 2<br />
+host_response_rate - 3<br />
+host_is_superhost, host_identity_verified - 2<br />
+neighbourhood_cleansed, state, city, zipcode - 6, 7<br />
+property_type, room_type - 2<br />
+accommodates, bathrooms, bedrooms, beds - 1, 7<br />
+amenities (TV,  wireless internet, air condition, heating, pets, washer, dryer) - 4<br />
+price, security_deposit, cleaning_fee, extra_people - 3<br />
+minimum_nights, maximum_nights, number_of_reviews - 1<br />
+review_scores_rating - 7<br />
+review_scores_accuracy/_cleanliness/_checkin/_communication/_location/_value - 6<br />
+instant_bookable - 2<br />
+cancellation_policy - 2<br />
+reviews_per_month - 6<br />
 
 1. Ready for use.
 2. Transfer categorical to numerical.
@@ -31,7 +30,7 @@ reviews_per_month - 6
 6. Not include.
 7. Handle missing values. *
 
-* For handling missing values：
+For handling missing values：
 1. state, city: shall we remove the houses not in IL 3/5207 and Chicago 31/5207? 
 2. bathrooms, bedrooms, beds: fill missing value with 0.
 3. review_scores_rating： remove those houses without rating scores
