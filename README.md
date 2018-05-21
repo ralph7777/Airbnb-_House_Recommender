@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Feel free to add any ideas or works you have done along with name and date.
 -------
 2018/5/20 Ralph
@@ -86,3 +87,7 @@ Here we may need to switch target attribute to Price.
 
 
 
+=======
+# Airbnb_House_Recommender
+Programming Data Mining Applications
+>>>>>>> origin/master
