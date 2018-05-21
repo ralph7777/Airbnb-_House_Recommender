@@ -1,3 +1,7 @@
+
+# Airbnb_House_Recommender
+## Programming Data Mining Applications
+
 Feel free to add any ideas or works you have done along with name and date.
 
 -------
@@ -82,11 +86,3 @@ Make a prediction of item score based on content of text review.
 ### 3. Rent Price Advicing (Interface feature):
 Based on prices of similar item (determined by selected features similarity), give reasonable price for a new item.
 Here we may need to switch target attribute to Price.
-
-
-
-
-=======
-# Airbnb_House_Recommender
-Programming Data Mining Applications
->>>>>>> origin/master
