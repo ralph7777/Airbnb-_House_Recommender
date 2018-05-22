@@ -4,6 +4,28 @@
 Feel free to add any ideas or works you have done along with name and date.
 
 -------
+2018/5/20 Lanny
+
+Almost done with attributes preprocessing. 
+Except for Amenities.
+
+Used 3 methods to transfer categorical to numerical:
+host_response_time<br />
+host_is_superhost, host_identity_verified<br />
+property_type, room_type, bed_type <br />
+instant_bookable <br />
+Did not do "cancellation_policy" <br />
+
+Dropped 'listing_url', 'name', 'summary', 'picture_url', 'state', 'city', 'zipcode', 'neighbourhood_cleansed', 'reviews_per_month' <br />
+
+Dropped NaN for review_scores_rating/ review_scores_accuracy/_cleanliness/_checkin/_communication/_location/_value <br />
+
+
+Transferred 'host_response_rate' to integers<br />
+Transferred 'price', 'security_deposit', 'cleaning_fee', 'extra_people' to float<br />
+bathrooms, bedrooms, beds: fill missing value with 0. 
+
+-------
 2018/5/20 Ralph
 
 Attributes preprocessing:
