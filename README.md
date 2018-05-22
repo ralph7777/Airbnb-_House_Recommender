@@ -4,7 +4,7 @@
 Feel free to add any ideas or works you have done along with name and date.
 
 -------
-2018/5/20 Lanny
+2018/5/21 Lanny
 
 Almost done with attributes preprocessing. 
 Except for Amenities.
