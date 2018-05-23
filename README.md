@@ -9,9 +9,12 @@ Feel free to add any ideas or works you have done along with name and date.
 Finish attributes preprocessing and generate the table for feature selection.<br />
 
 When reading in data, set id as index column<br />
-Transfer 'cancellation_policy"
+
+Transfer 'cancellation_policy"<br />
+
 Extract ['TV', 'Internet', 'Air conditioning', 'Kitchen' , 'Heating', 'Washer', 'Dryer'] in amenities to be new columns with values of 0 and 1<br />
-Reorder some codes
+
+Reorder some codes<br />
 
 
 -------
