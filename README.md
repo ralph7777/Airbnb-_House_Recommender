@@ -4,6 +4,17 @@
 Feel free to add any ideas or works you have done along with name and date.
 
 -------
+2018/5/21 Ralph
+
+Finish attributes preprocessing and generate the table for feature selection.<br />
+
+When reading in data, set id as index column<br />
+Transfer 'cancellation_policy"
+Extract ['TV', 'Internet', 'Air conditioning', 'Kitchen' , 'Heating', 'Washer', 'Dryer'] in amenities to be new columns with values of 0 and 1<br />
+Reorder some codes
+
+
+-------
 2018/5/21 Lanny
 
 Almost done with attributes preprocessing. 
