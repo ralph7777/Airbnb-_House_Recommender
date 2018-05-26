@@ -4,6 +4,19 @@
 Feel free to add any ideas or works you have done along with name and date.
 
 -------
+2018/5/25 Ralph
+
+Split the data attributes from the target (review_scores_rating). <br />
+
+Add three basic feature methods to do feature selection.<br />
+
+Reduce the number of features from 28 to 18 or 17.<br />
+
+Next:<br />
+
+Add more systemetic regression analysis (more model and parameter analysis), to determine the best model for rating prediction.<br />
+
+-------
 2018/5/22 Ralph
 
 Finish attributes preprocessing and generate the table for feature selection.<br />

@@ -11788,7 +11788,10 @@ div#notebook {
 <span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">KFold</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
 <span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">ElasticNet</span><span class="p">,</span> <span class="n">SGDRegressor</span>
+
 <span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">preprocessing</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">feature_selection</span>
+<span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">cross_validation</span>
 <span class="kn">import</span> <span class="nn">operator</span>
 </pre></div>
 
@@ -13804,7 +13807,7 @@ Name: host_response_rate, dtype: int32</pre>
 <div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">listings_eval</span> <span class="o">=</span> <span class="n">listings_edit</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;listing_url&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;summary&#39;</span><span class="p">,</span><span class="s1">&#39;picture_url&#39;</span><span class="p">,</span><span class="s1">&#39;amenities&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">listings_eval</span> <span class="o">=</span> <span class="n">listings_edit</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;listing_url&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="s1">&#39;summary&#39;</span><span class="p">,</span><span class="s1">&#39;picture_url&#39;</span><span class="p">,</span><span class="s1">&#39;amenities&#39;</span><span class="p">,</span> <span class="s1">&#39;review_scores_accuracy&#39;</span><span class="p">,</span> <span class="s1">&#39;review_scores_cleanliness&#39;</span><span class="p">,</span> <span class="s1">&#39;review_scores_checkin&#39;</span><span class="p">,</span> <span class="s1">&#39;review_scores_communication&#39;</span><span class="p">,</span> <span class="s1">&#39;review_scores_location&#39;</span><span class="p">,</span> <span class="s1">&#39;review_scores_value&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -13847,7 +13850,7 @@ Name: host_response_rate, dtype: int32</pre>
       <th>bedrooms</th>
       <th>beds</th>
       <th>...</th>
-      <th>review_scores_value</th>
+      <th>review_scores_rating</th>
       <th>instant_bookable</th>
       <th>cancellation_policy</th>
       <th>TV</th>
@@ -13897,7 +13900,7 @@ Name: host_response_rate, dtype: int32</pre>
       <td>1</td>
       <td>2</td>
       <td>...</td>
-      <td>10.0</td>
+      <td>99.0</td>
       <td>1</td>
       <td>1</td>
       <td>1</td>
@@ -13921,7 +13924,7 @@ Name: host_response_rate, dtype: int32</pre>
       <td>2</td>
       <td>3</td>
       <td>...</td>
-      <td>10.0</td>
+      <td>95.0</td>
       <td>0</td>
       <td>1</td>
       <td>1</td>
@@ -13945,7 +13948,7 @@ Name: host_response_rate, dtype: int32</pre>
       <td>1</td>
       <td>1</td>
       <td>...</td>
-      <td>10.0</td>
+      <td>98.0</td>
       <td>0</td>
       <td>0</td>
       <td>1</td>
@@ -13969,7 +13972,7 @@ Name: host_response_rate, dtype: int32</pre>
       <td>1</td>
       <td>1</td>
       <td>...</td>
-      <td>9.0</td>
+      <td>94.0</td>
       <td>1</td>
       <td>2</td>
       <td>1</td>
@@ -13993,7 +13996,7 @@ Name: host_response_rate, dtype: int32</pre>
       <td>1</td>
       <td>1</td>
       <td>...</td>
-      <td>10.0</td>
+      <td>100.0</td>
       <td>1</td>
       <td>2</td>
       <td>1</td>
@@ -14006,10 +14009,369 @@ Name: host_response_rate, dtype: int32</pre>
     </tr>
   </tbody>
 </table>
-<p>5 rows × 35 columns</p>
+<p>5 rows × 29 columns</p>
 </div>
 </div>
 
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Feature-Selection">Feature Selection<a class="anchor-link" href="#Feature-Selection">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Split-data-and-target-attributes">Split data and target attributes<a class="anchor-link" href="#Split-data-and-target-attributes">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Feature analysis</span>
+<span class="n">fa_target</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">listings_eval</span><span class="p">[</span><span class="s1">&#39;review_scores_rating&#39;</span><span class="p">])</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">listings_eval</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">&#39;review_scores_rating&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">data</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">shape</span>
+<span class="n">fa_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(28, 4273)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Define-a-function-to-compute-the-optimal-percentile-for-FS">Define a function to compute the optimal percentile for FS<a class="anchor-link" href="#Define-a-function-to-compute-the-optimal-percentile-for-FS">&#182;</a></h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Take as input the training data, target variable, the model and any other parameters</span>
+<span class="c1"># return the optimal percentage of the most informative features to use</span>
+<span class="k">def</span> <span class="nf">calc_percent</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">interval</span><span class="p">,</span> <span class="n">K</span><span class="p">):</span>
+    <span class="n">percentiles</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">interval</span><span class="p">)</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">minScore</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="k">print</span> <span class="s2">&quot;Percentile</span><span class="se">\t</span><span class="s2">MAE&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="n">interval</span><span class="p">):</span>
+        <span class="n">fs</span> <span class="o">=</span> <span class="n">feature_selection</span><span class="o">.</span><span class="n">SelectPercentile</span><span class="p">(</span><span class="n">feature_selection</span><span class="o">.</span><span class="n">f_regression</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">train_fs</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+        <span class="n">scores</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">cross_validation</span><span class="o">.</span><span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">train_fs</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">K</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_absolute_error&#39;</span><span class="p">))</span>
+        <span class="c1"># cross validation, return score array for each croos-validation</span>
+        <span class="c1"># neg_mean_absolute_error returns negative MAE</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">minScore</span><span class="p">):</span>
+            <span class="n">minScore</span> <span class="o">=</span> <span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+            <span class="n">optimal_percentile</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+        <span class="k">print</span> <span class="s2">&quot;</span><span class="si">%d</span><span class="se">\t\t</span><span class="si">%.4f</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">scores</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+        
+    <span class="k">print</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Optimal percentile of features:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">optimal_percentile</span><span class="p">)</span>
+    <span class="n">optimal_num_features</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">optimal_percentile</span><span class="o">*</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">/</span><span class="mi">100</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s2">&quot;Optimal number of features:{0}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">optimal_num_features</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">optimal_percentile</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Try Linear regression</span>
+<span class="n">linreg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">linreg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">fa_train</span><span class="p">,</span> <span class="n">fa_target</span><span class="p">)</span>
+
+<span class="n">lr_opPer</span> <span class="o">=</span> <span class="n">calc_percent</span><span class="p">(</span><span class="n">fa_train</span><span class="p">,</span> <span class="n">fa_target</span><span class="p">,</span> <span class="n">linreg</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Percentile	MAE
+1		3.9073
+6		3.8844
+11		3.8668
+16		3.8581
+21		3.8570
+26		3.8347
+31		3.8360
+36		3.8345
+41		3.8165
+46		3.8167
+51		3.8131
+56		3.8212
+61		3.7853
+66		3.7844
+71		3.7895
+76		3.7913
+81		3.7916
+86		3.7915
+91		3.7848
+96		3.7866
+
+Optimal percentile of features:66
+Optimal number of features:18
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="n">feature_selection</span><span class="o">.</span><span class="n">SelectPercentile</span><span class="p">(</span><span class="n">feature_selection</span><span class="o">.</span><span class="n">f_regression</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="n">lr_opPer</span><span class="p">)</span>
+<span class="n">train_lr_fs</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">fa_train</span><span class="p">,</span> <span class="n">fa_target</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;Selcted features:&quot;</span>
+<span class="k">print</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Selcted features:
+[&#39;host_response_rate&#39; &#39;host_is_superhost&#39; &#39;host_identity_verified&#39;
+ &#39;accommodates&#39; &#39;beds&#39; &#39;bed_type&#39; &#39;price&#39; &#39;minimum_nights&#39;
+ &#39;number_of_reviews&#39; &#39;instant_bookable&#39; &#39;cancellation_policy&#39; &#39;TV&#39;
+ &#39;Internet&#39; &#39;Air conditioning&#39; &#39;Kitchen&#39; &#39;Heating&#39; &#39;Washer&#39; &#39;Dryer&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[64]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Try Ridge regression</span>
+<span class="c1"># 这里还可以试试不同的参数，像作业那样用GridSearch系统分析</span>
+<span class="n">rireg</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="n">rireg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">fa_train</span><span class="p">,</span> <span class="n">fa_target</span><span class="p">)</span>
+
+<span class="n">rr_opPer</span><span class="o">=</span> <span class="n">calc_percent</span><span class="p">(</span><span class="n">fa_train</span><span class="p">,</span> <span class="n">fa_target</span><span class="p">,</span> <span class="n">rireg</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Percentile	MAE
+1		3.9073
+6		3.8845
+11		3.8667
+16		3.8581
+21		3.8569
+26		3.8346
+31		3.8359
+36		3.8344
+41		3.8164
+46		3.8166
+51		3.8130
+56		3.8211
+61		3.7852
+66		3.7843
+71		3.7894
+76		3.7912
+81		3.7915
+86		3.7914
+91		3.7847
+96		3.7865
+
+Optimal percentile of features:66
+Optimal number of features:18
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[65]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="n">feature_selection</span><span class="o">.</span><span class="n">SelectPercentile</span><span class="p">(</span><span class="n">feature_selection</span><span class="o">.</span><span class="n">f_regression</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="n">rr_opPer</span><span class="p">)</span>
+<span class="n">train_rr_fs</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">fa_train</span><span class="p">,</span> <span class="n">fa_target</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;Selcted features:&quot;</span>
+<span class="k">print</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Selcted features:
+[&#39;host_response_rate&#39; &#39;host_is_superhost&#39; &#39;host_identity_verified&#39;
+ &#39;accommodates&#39; &#39;beds&#39; &#39;bed_type&#39; &#39;price&#39; &#39;minimum_nights&#39;
+ &#39;number_of_reviews&#39; &#39;instant_bookable&#39; &#39;cancellation_policy&#39; &#39;TV&#39;
+ &#39;Internet&#39; &#39;Air conditioning&#39; &#39;Kitchen&#39; &#39;Heating&#39; &#39;Washer&#39; &#39;Dryer&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[66]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Try Lasso regression</span>
+<span class="n">lareg</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">)</span>
+<span class="n">lareg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">fa_train</span><span class="p">,</span> <span class="n">fa_target</span><span class="p">)</span>
+
+<span class="n">la_opPer</span><span class="o">=</span> <span class="n">calc_percent</span><span class="p">(</span><span class="n">fa_train</span><span class="p">,</span> <span class="n">fa_target</span><span class="p">,</span> <span class="n">lareg</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Percentile	MAE
+1		3.9713
+6		3.9661
+11		3.9661
+16		3.9661
+21		3.9661
+26		3.9592
+31		3.9568
+36		3.9564
+41		3.9302
+46		3.9302
+51		3.9302
+56		3.9346
+61		3.9091
+66		3.9091
+71		3.9091
+76		3.9091
+81		3.9098
+86		3.9098
+91		3.9098
+96		3.9134
+
+Optimal percentile of features:61
+Optimal number of features:17
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[67]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="n">feature_selection</span><span class="o">.</span><span class="n">SelectPercentile</span><span class="p">(</span><span class="n">feature_selection</span><span class="o">.</span><span class="n">f_regression</span><span class="p">,</span> <span class="n">percentile</span><span class="o">=</span><span class="n">la_opPer</span><span class="p">)</span>
+<span class="n">train_la_fs</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">fa_train</span><span class="p">,</span> <span class="n">fa_target</span><span class="p">)</span>
+<span class="k">print</span> <span class="s2">&quot;Selcted features:&quot;</span>
+<span class="k">print</span> <span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">fs</span><span class="o">.</span><span class="n">get_support</span><span class="p">()]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area"><div class="prompt"></div>
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Selcted features:
+[&#39;host_response_rate&#39; &#39;host_is_superhost&#39; &#39;accommodates&#39; &#39;beds&#39; &#39;bed_type&#39;
+ &#39;price&#39; &#39;minimum_nights&#39; &#39;number_of_reviews&#39; &#39;instant_bookable&#39;
+ &#39;cancellation_policy&#39; &#39;TV&#39; &#39;Internet&#39; &#39;Air conditioning&#39; &#39;Kitchen&#39;
+ &#39;Heating&#39; &#39;Washer&#39; &#39;Dryer&#39;]
+</pre>
+</div>
 </div>
 
 </div>
