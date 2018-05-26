@@ -16,6 +16,8 @@ Next:<br />
 
 Add more systemetic regression analysis (more model and parameter analysis), to determine the best model for rating prediction.<br />
 
+Do 80-20 splitting analysis so that the accuray of predicting model can be evaluated.<br />
+
 -------
 2018/5/22 Ralph
 
