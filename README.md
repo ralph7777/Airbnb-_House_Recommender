@@ -10,14 +10,14 @@ Did 80-20 splitting. Evaluate some of the accuracy.<br />
 
 Add 2 more basic feature methods to do feature selection.<br />
 
-Next:
-find a proper way to evaluate the accuracy.
+Next:<br />
+find a proper way to evaluate the accuracy.<br />
 
-For Item-Based filtering: use 3 types of item similarity metrics:
+For Item-Based filtering: use 3 types of item similarity metrics:<br />
 
- #1 Jaccard Similarity
- #2 Cosine Similarity
- #3 Pearson Similarity 
+ #1 Jaccard Similarity <br />
+ #2 Cosine Similarity <br />
+ #3 Pearson Similarity <br />
 
 -------
 2018/5/25 Ralph
