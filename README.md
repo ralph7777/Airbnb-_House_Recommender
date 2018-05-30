@@ -4,6 +4,22 @@
 Feel free to add any ideas or works you have done along with name and date.
 
 -------
+2018/5/29 Lanny
+
+Did 80-20 splitting. Evaluate some of the accuracy.<br />
+
+Add 2 more basic feature methods to do feature selection.<br />
+
+Next:
+find a proper way to evaluate the accuracy.
+
+For Item-Based filtering: use 3 types of item similarity metrics:
+
+ #1 Jaccard Similarity
+ #2 Cosine Similarity
+ #3 Pearson Similarity 
+
+-------
 2018/5/25 Ralph
 
 Split the data attributes from the target (review_scores_rating). <br />
