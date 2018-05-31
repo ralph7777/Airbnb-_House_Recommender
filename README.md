@@ -4,6 +4,20 @@
 Feel free to add any ideas or works you have done along with name and date.
 
 -------
+2018/5/30 Lanny
+
+Because have not decide how to evaluate accuracy fot the feature selection, just chose to use one of the selcted features to start Item-Based filtering for now: <br />
+Use 3 types of item similarity metrics:<br />
+ #1 Cosine Similarity <br />
+ #2 Pearson Similarity <br />
+ #3 Euclidean Similarity <br />
+
+Calculate MAE and pick Euclidean for this project.<br />
+
+Next:<br />
+find a proper way to evaluate the accuracy of selected features.<br />
+
+-------
 2018/5/29 Lanny
 
 Did 80-20 splitting. Evaluate some of the accuracy.<br />
@@ -15,8 +29,8 @@ find a proper way to evaluate the accuracy.<br />
 
 For Item-Based filtering: use 3 types of item similarity metrics:<br />
 
- #1 Jaccard Similarity <br />
- #2 Cosine Similarity <br />
+ #1 Cosine Similarity <br />
+ #2 Adjusted Cosine Similarity <br />
  #3 Pearson Similarity <br />
 
 -------
