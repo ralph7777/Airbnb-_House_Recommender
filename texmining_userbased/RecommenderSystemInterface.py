@@ -6,6 +6,7 @@
 
 # ## 1. Data Preprocessing
 
+from numpy import *
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -194,54 +195,62 @@ def recommend_list(dataMat, user_id, list_id, queryUser, K):
         result = predict(dataMat, user_id, queryUser, item, sorted_most_similar_users, K)
         predict_rating[item] = result
     sorted_list = sorted(predict_rating.items(), key=operator.itemgetter(1), reverse=True)
-    print 'Selected User:'
-    print user_id[queryUser], '\n'
+    print ""
+    print ""
+    print '==================================='
+    print '  Selected User:', user_id[queryUser]
+    print '==================================='
     print 'The listing we recommend to this user: ','\n'
+
     index = 0
     for key, values in sorted_list:
         if(index == K):
             break
         print list_id[key], 'Website: https://www.airbnb.com/rooms/', list_id[key], '\n'
-        print '----------------------'
+        print '------------------------------------------'
         index += 1
 
-def recommender_user(review_id):
+def recommender_user(list_id, review_id, dataMat):
 	while True:
+		print ""
+		print ""
 		print "Please enter you Airbnb user name. If your user name is our dataset, we will provide top several recommendations for you."
 		print "Enter 'R' to back the menu"
-		user_id = raw_input()
+		print ""
+		print "REVIEW ID FOR TESTING:"
+		print ""
+		print review_id[0:20]
+		intput = raw_input()
 		user_index = 0
-		print 'user_id', user_id
-		if (user_id == 'R' or user_id == 'r'):
-			recommenderinterface()
-		elif (user_id in review_id):
+		if (intput == 'R' or intput == 'r'):
+			break
+		user_id = int(intput)
+		if (user_id in review_id):
 			user_index = np.where(user_id == review_id)[0][0]
-			print 'user_index', user_index
-			print('Your listing recommendations:')
-        	recommend_list(dataMat, review_id, list_id, user_index, 3)
-        else:
-        	print "User name is not existed!"
+			recommend_list(dataMat, review_id, list_id, user_index, 3)
+		else:
+			print "User name is not existed!"
 			
-
-
-def recommenderinterface():
-	while True:
-		print "==============================="
-		print "***** Recommender System ******"
-		print "==============================="
-		print ""
-		print "Two recommendation systems:"
-		print "---1) ITEM-BASED COLLABORATIVE RECOMMENDER"
-		print "---2) USER-BASED COLLABORATIVE RECOMMENDER"
-		print "One prediction rating system:"
-		print "---3) SUGGESTED RATING FRO USER"
-		print ""
-		print "Please type '1' or '2' or '3'"
-		print "Enter 'Q' to quit the application"
-		input = raw_input()
-		if input == '2':
-			recommender_user(review_id)
-		if (input == 'Q' or input == 'q'):
+def recommenderinterface(list_id, review_id, dataMat):
+    while True:
+    	print ""
+    	print ""
+    	print "==============================="
+    	print "***** Recommender System ******"
+    	print "==============================="
+    	print ""
+    	print "Two recommendation systems:"
+    	print "---1) ITEM-BASED COLLABORATIVE RECOMMENDER"
+    	print "---2) USER-BASED COLLABORATIVE RECOMMENDER"
+    	print "One prediction rating system:"
+    	print "---3) SUGGESTED RATING FRO USER"
+    	print ""
+    	print "Please type '1' or '2' or '3'"
+    	print "Enter 'Q' to quit the application"
+    	inp = raw_input()
+    	if inp == '2':
+    		recommender_user(list_id, review_id,dataMat)
+    	if (inp == 'Q' or inp == 'q'):
 			break
 
-recommenderinterface()
+recommenderinterface(list_id, review_id, dataMat)
