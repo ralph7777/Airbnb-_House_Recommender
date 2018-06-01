@@ -6,11 +6,35 @@
 
 # ## 1. Data Preprocessing
 
+import warnings
+with warnings.catch_warnings():
+	warnings.filterwarnings("ignore",category=DeprecationWarning)
+
 from numpy import *
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import string
+import pickle
+import warnings
+
+
+import nltk
+from nltk.stem.porter import PorterStemmer
+from nltk.tokenize import word_tokenize, sent_tokenize
+
+
+from sklearn.linear_model import LinearRegression
+from sklearn.feature_extraction.text import TfidfTransformer
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn import metrics
+from sklearn.externals import joblib
+
+CountV = joblib.load('CountVectorizer.pkl')
+tfidf_trans = joblib.load('tfidf_trans.pkl')
+regression_pre = joblib.load('Regression_Predict_Rating.pkl') 
+
+
 
 #read the data
 housing_reviews = pd.read_table("reviews.csv", header='infer', delimiter=",", na_values='NaN')
@@ -211,6 +235,11 @@ def recommend_list(dataMat, user_id, list_id, queryUser, K):
         index += 1
 
 def recommender_user(list_id, review_id, dataMat):
+	print ""
+	print ""
+	print '-------------------------------------'
+	print "ITEM-BASED COLLABORATIVE RECOMMENDER"
+	print '-------------------------------------'
 	while True:
 		print ""
 		print ""
@@ -231,6 +260,59 @@ def recommender_user(list_id, review_id, dataMat):
 		else:
 			print "User name is not existed!"
 			
+
+words_to_remove=['i', 'me', 'my', 'myself', 'we', 'our', 'ours', 'ourselves', 'you', 'your', 'yours',
+'yourself', 'yourselves', 'he', 'him', 'his', 'himself', 'she', 'her', 'hers',
+'herself', 'it', 'its', 'itself', 'they', 'them', 'their', 'theirs', 'themselves',
+'what', 'which', 'who', 'whom', 'this', 'that', 'these', 'those', 'am', 'is', 'are',
+'was', 'were', 'be', 'been', 'being', 'have', 'has', 'had', 'having', 'do', 'does',
+'did', 'doing', 'a', 'an', 'the', 'and', 'but', 'if', 'or', 'because', 'as', 'until',
+'while', 'of', 'at', 'by', 'for', 'with', 'about', 'against', 'between', 'into',
+'through', 'during', 'before', 'after', 'above', 'below', 'to', 'from', 'up', 'down',
+'in', 'out', 'on', 'off', 'over', 'under', 'again', 'further', 'then', 'once', 'here',
+'there', 'when', 'where', 'why', 'how', 'all', 'any', 'both', 'each', 'few', 'more',
+'most', 'other', 'some', 'such', 'no', 'nor', 'not', 'only', 'own', 'same', 'so',
+'than', 'too', 'very', 's', 't', 'can', 'will', 'just', 'don', 'should', 'now']
+
+
+def clean_my_data(text):
+    stemmer = PorterStemmer()
+    clean_text=[]
+    tokens = nltk.word_tokenize(text)
+    tagged = nltk.pos_tag(tokens)
+    container=[]
+    for words in tagged:
+        if (words[1][0] == 'N' or words[1][0]=='J' or words[1][0] == 'V') and (words[1][0] not in words_to_remove):
+            container.append(words[0])
+    for words in container:
+        word = stemmer.stem(words)
+        clean_text.append(word)
+    return ' '.join(clean_text)
+
+
+
+def predict_rating():
+	print ""
+	print ""
+	print '--------------------------'
+	print "SUGGESTED RATING FRO USER"
+	print '--------------------------'
+	while True:
+		print ""
+		print ""
+		print "Please enter your review for Airbnb. The application will provide the suggested rating with you."
+		print "Enter 'R' to back the menu"
+		inp = raw_input()
+		if (inp == 'R' or inp == 'r'):
+			break
+		print inp
+		review = clean_my_data(inp)
+		mat = CountV.transform([review])
+		tfidf = tfidf_trans.transform(mat)
+		rating = regression_pre.predict(tfidf)[0]
+		print "SUGGESTED RATING:", rating
+
+
 def recommenderinterface(list_id, review_id, dataMat):
     while True:
     	print ""
@@ -248,9 +330,23 @@ def recommenderinterface(list_id, review_id, dataMat):
     	print "Please type '1' or '2' or '3'"
     	print "Enter 'Q' to quit the application"
     	inp = raw_input()
+
     	if inp == '2':
     		recommender_user(list_id, review_id,dataMat)
+    	if inp == '3':
+    		predict_rating()
     	if (inp == 'Q' or inp == 'q'):
 			break
 
 recommenderinterface(list_id, review_id, dataMat)
+
+
+
+
+
+
+
+
+
+
+
