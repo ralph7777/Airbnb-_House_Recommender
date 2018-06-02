@@ -4,6 +4,14 @@
 Feel free to add any ideas or works you have done along with name and date.
 
 -------
+2018/6/2 Ralph
+
+Clean and organize codes in all notebook files.<br />
+For User-based recommender, add MAE analysis to determine the similarity measure method. Rework some functions for user recommender.<br />
+
+Will work on the codes in UI tonight. <br />
+
+-------
 2018/6/2 Lanny
 
 Implement and finish the item-based recommender for Python application，also optimized the outputs for better looking<br />
