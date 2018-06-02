@@ -40,6 +40,7 @@ regression_pre = joblib.load('Regression_Predict_Rating.pkl')
 housing_reviews = pd.read_table("reviews.csv", header='infer', delimiter=",", na_values='NaN')
 listings = pd.read_table("listings_edited.csv", index_col=0, header='infer', delimiter=",")
 
+
 #drop the missing value
 drop_rating_index = housing_reviews.index[housing_reviews['rating'] == 0]
 drop_rating_index.tolist()
@@ -309,13 +310,10 @@ def recommend_item_list(query_index):
     distances, indices = euc_knn.kneighbors(listings_eval_update.iloc[query_index,:].values.reshape(1, -1), n_neighbors = 6)
     for i in range(0, len(distances.flatten())):
         if i == 0:
-            print "Recommendation for {0}: \n".format(listings_eval_update.index[query_index])
+            print "Recommendation for %s: \n" %(listings_eval_update.index[query_index])
         else:
             recommend_id = listings_eval_update.index[indices.flatten()[i]]
-            print "{0}: 【{1}】\n    Name: '{2}'\n    Website: {3}\n\n    Summary: '{4}'\n".format(i, recommend_id,listings.loc[recommend_id]["name"],
-             listings.loc[recommend_id]["listing_url"], listings.loc[recommend_id]["summary"]
-                )
-            #Image.open(StringIO(urllib.urlopen(listings.loc[recommend_id]["picture_url"]).read()))
+            print "%s: id: %s\n   Name: '%s'\n   Website: %s\n   Summary:\n   '%s'\n" %(i, recommend_id,listings.loc[recommend_id]["name"], listings.loc[recommend_id]["listing_url"], listings.loc[recommend_id]["summary"])
 
 def recommend_item():
     print ""
