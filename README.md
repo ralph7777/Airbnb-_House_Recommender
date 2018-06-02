@@ -4,6 +4,20 @@
 Feel free to add any ideas or works you have done along with name and date.
 
 -------
+2018/6/1 Ralph
+
+Modify the function provided by professor, extract the computation of column-based similarity. <br />
+Re-run and clean the code based on selected features. <br />
+ 
+-------
+2018/5/31 Ralph
+
+Add Percentile-MAE figures to visualize the data. <br />
+Add MAE results for testing dataset using different FS approach. <br />
+Compare results and decide to choose 15 critical features. <br />
+Clean codes. <br />
+
+-------
 2018/5/30 Lanny
 
 Because have not decide how to evaluate accuracy fot the feature selection, just chose to use one of the selcted features to start Item-Based filtering for now: <br />
