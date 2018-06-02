@@ -4,6 +4,12 @@
 Feel free to add any ideas or works you have done along with name and date.
 
 -------
+2018/6/2 Lanny
+
+Implement and finish the item-based recommender for Python application，also optimized the outputs for better looking<br />
+Move around files and rename folders for easy access. <br />
+
+-------
 2018/6/1 Ralph
 
 Modify the function provided by professor, extract the computation of column-based similarity. <br />
