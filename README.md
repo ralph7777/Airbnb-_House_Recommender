@@ -6,6 +6,13 @@ Feel free to add any ideas or works you have done along with name and date.
 -------
 2018/6/2 Ralph
 
+Update some functions in UI.<br />
+Rework on UI prompt and code comment.<br />
+Recommender now can display listing Images! <br />
+
+-------
+2018/6/2 Ralph
+
 Clean and organize codes in all notebook files.<br />
 For User-based recommender, add MAE analysis to determine the similarity measure method. Rework some functions for user recommender.<br />
 
