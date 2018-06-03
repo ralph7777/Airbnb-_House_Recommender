@@ -219,7 +219,7 @@ def recommend_list(dataMat, user_id, list_id, queryUser, K):
         if(index > K):
             break
         list_index = list_id[key]
-        print "Recommendation %s:\nid: %s\nName: '%s'\nWebsite: %s\nSummary: '%s'\n" %(index, list_index, listings.loc[list_index]["name"], listings.loc[list_index]["listing_url"], listings.loc[list_index]["summary"])
+        print "Recommendation %s:\nID: %s\nName: '%s'\nWebsite: %s\nSummary: '%s'\n" %(index, list_index, listings.loc[list_index]["name"], listings.loc[list_index]["listing_url"], listings.loc[list_index]["summary"])
         imgFile = cStringIO.StringIO(urllib.urlopen(listings.loc[list_index]["picture_url"]).read())
         img = Image.open(imgFile)
         img.show()
@@ -240,7 +240,7 @@ def recommend_item_list(query_index):
             print 'Listing recommendations:\n'
         else:
             recommend_id = listings_eval_update.index[indices.flatten()[i]]
-            print "Recommendation %s:\nid: %s\nName: '%s'\nWebsite: %s\nSummary: '%s'\n" %(i, recommend_id,listings.loc[recommend_id]["name"], listings.loc[recommend_id]["listing_url"], listings.loc[recommend_id]["summary"])
+            print "Recommendation %s:\nID: %s\nName: '%s'\nWebsite: %s\nSummary: '%s'\n" %(i, recommend_id,listings.loc[recommend_id]["name"], listings.loc[recommend_id]["listing_url"], listings.loc[recommend_id]["summary"])
             imgFile = cStringIO.StringIO(urllib.urlopen(listings.loc[recommend_id]["picture_url"]).read())
             img = Image.open(imgFile)
             img.show()
