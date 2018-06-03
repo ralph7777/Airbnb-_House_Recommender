@@ -164,7 +164,7 @@ def cosSim(inA,inB):
 
 # function to compute similaries among users
 import operator
-def most_similar_users(dataMat, queryUser, K, metric = pearsSim):
+def most_similar_users(dataMat, queryUser, K, metric = ecludSim):
     user  = dataMat[queryUser]
     sim = {}
     index = 0
